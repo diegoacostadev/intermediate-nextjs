@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm'
 import { users } from '@/db/schema'
 import bcrypt from 'bcrypt'
 
-const SECRET = 'use_an_ENV_VAR'
+const SECRET = process.env.JWT_SECRET as string;
 
 export const createTokenForUser = (userId: string) => {
   const token = jwt.sign({ id: userId }, SECRET)
@@ -41,12 +41,12 @@ export const signin = async ({
     where: eq(users.email, email),
   })
 
-  if (!match) throw new Error('invalid user')
+  if (!match) throw new Error('Invalid User.')
 
   const correctPW = await comparePW(password, match.password)
 
   if (!correctPW) {
-    throw new Error('invalud user')
+    throw new Error('Password is incorrect.')
   }
 
   const token = createTokenForUser(match.id)

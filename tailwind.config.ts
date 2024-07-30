@@ -18,6 +18,27 @@ const config: Config = {
     },
   },
   darkMode: 'class',
-  plugins: [nextui()],
+  plugins: [nextui({
+    prefix: 'myapp',
+    layout: {
+      radius: {
+        // small: "2px", // rounded-small
+        // medium: "4px", // rounded-medium
+        // large: "6px", // rounded-large
+      },
+    },
+    themes: {
+      light: {},
+      dark: {
+        colors: {
+          // primary: {
+          //   DEFAULT: "#f00",
+          //   foreground: "#000000",
+          // },
+          // focus: "#BEF264"
+        }
+      },
+    },
+  })],
 }
 export default config
